@@ -3,6 +3,8 @@ package com.zhaoyiyang.imageloader.cache;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.zhaoyiyang.imageloader.util.CloseUtils;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,13 +38,7 @@ public class DiskCache implements ImageCache {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }finally {
-            if (fos != null){
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            CloseUtils.closeQuietly(fos);
         }
     }
 
